@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Implementing CHIP-8 in Jack</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="../img/k173.png" type="image/gif" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<!-- Code highlighting  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+
+<body>
+<a href="../index.html">
+<img src="../img/logo.svg" id="logo">
+</a>
+
+<h2>Implementing CHIP-8 in Jack</h2>
+<h5>2021-11-16</h5>
+
+<p>
+In this post, I will go over how I implemented a CHIP-8 emulator using Jack
+language (from the nand2tetris course). The emulator that it runs on is
+also made by me, so it is quite slow at the moment.
+</p>
+
+<p>
+Given starting co-ordinates, we use the below function to draw a 64x32
+screen somewhere with the screen.
+</p>
+
+<pre>
+<code class="java">
+function void drawBox() {
+    do Screen.drawLine(bx,    by,    bx+64,  by);      // top
+    do Screen.drawLine(bx,    by,    bx,     by+32);   // left
+    do Screen.drawLine(bx+64, by,    bx+64,  by+32);   // right
+    do Screen.drawLine(bx,    by+32, bx+64,  by+32);   // bottom
+    return;
+}
+</code>
+</pre>
+
+<p>
+TBD.
+</p>
+
+</body>
+</html>
