@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Program too large</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="../img/k173.png" type="image/gif" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<!-- Code highlighting  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+
+<body>
+<a href="../index.html">
+<img src="../img/logo.svg" id="logo">
+</a>
+
+<h1>Program too large</h1>
+<h5>06/06/2021</h5>
+
+<p>
+This post outlines my motivations for extending the <a
+href="https://www.nand2tetris.org/project12">Jack</a> operating system.
+</p>
+
+<p>
+Hack is a 16-bit computer. It uses the Most Significant Bit (MSB) to denote
+sign. The remaining 15 bits allow us to uniquely identify 32768 locations
+in memory. Consequently, we can have a maximum of 32768 Hack instructions
+in the ROM at a time.
+</p>
+
+<p>
+If you try to compile, translate and assemble the game of Pong, you might
+get an error: "Program too large" because the translation results in an
+enormous program.
+</p>
+
+<p>
+One way to solve this problem is to <a
+href="http://nand2tetris-questions-and-answers-forum.32033.n3.nabble.com/Links-to-posts-discussing-generated-Assembly-Language-size-td4031627.html">
+optimize</a> the toolchain. The course authors provide us with a heavily
+optimized version of Pong. So, it is evident that with enough effort you
+can fit some really cool stuff into the ROM.
+</p>
+
+<p>
+But there must be a limit to how much you can optimize before you run out of
+memory. Considering larger programs, I felt the operating system portion of the
+course was a bit lacking.
+</p>
+
+<p>
+Working on a more sophisticated operating system would require much more
+space than we could optimize for. So I decided to forego the optimization
+challenge.  Perhaps I'll come back to it later. I moved on to just making
+the ROM bigger.
+</p>
+
+<p>
+However, we can't simply increase the size of the ROM. We also need to
+increase the size addressable by our registers. You can't access more than
+32K unique locations with only 15 bits to spare.
+</p>
+
+<p>
+So I changed the architecture from 16-bit to 64-bit. Now, the addressable
+space for the instruction memory is far more than the 32K we could get with
+the 15-bit addressing. The changes in my extension project are incompatible
+with the original Hack platform.
+</p>
+
+<pre>
+<code class="python">
+2**(16-1) = 32768
+2**(64-1) = 9223372036854775808
+</code>
+</pre>
+
+<p>
+The A instructions changed in a very simple manner: earlier, we used to
+have a zero at the MSB and the rest of the bits indicated the value to be
+put into the A register. The only difference in the 64-bit version is that
+the size of the address value has increased from 15 bits to 63 bits. The
+MSB is still zero.
+</p>
+
+<p>
+The C instructions also needed to be 64-bit wide. In order to make them
+wider, I have padded them with zeros to the left. The MSB is hardcoded as 1
+to differentiate them from A instructions. New opcodes have been added to
+support multiplication and division in the CPU.
+</p>
+
+<p>
+The CPU emulator has now been designed to consider the entire memory as one
+contiguous block of memory instead of a ROM and a RAM. This is so that in
+the future we can load programs into the memory at runtime and execute
+them.
+</p>
+
+<p>
+Since the two types of memories have been merged, the memory layout has
+also changed. This change is temporary and will be considered more, once
+the operating system develops further.
+</p>
+
+<pre>
+<code class="python">
+DATA:     0x0000 to 0x3fff
+SCREEN:   0x4000 to 0x5fff
+KEYBOARD: 0x6000
+RESERVED: 0x6001 to 0x7fff
+CODE:     0x8000 to 0xfffff
+DISK:     0x10000 to N/A
+</code>
+</pre>
+
+<p>
+With this layout, we have the ability to increase the CODE section as much
+as we want, since it is at the tail end. Now we can run Pong on the CPU
+emulator without optimizing the toolchain.
+</p>
+
+<p>
+You can find the project source <a
+href="https://github.com/abhaynayar/genesis">here</a>.
+</p>
+
+</body>
+</html>
