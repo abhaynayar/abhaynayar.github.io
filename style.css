@@ -53,27 +53,7 @@ img {
     max-width: 100%;
 }
 
-/*
-pre {
-    width: auto;
-    overflow: auto;
-    max-height: 600px;
-    background-color: #eee;
-    border: 1px solid black;
-}
-*/
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: monospace;
-}
-
 #logo {
     width: 64px;
     margin-bottom: 20px;
-}
-
-.fab, .fas {
-    margin: 5px;
-    color: black;
-    font-size: 18px;
 }
