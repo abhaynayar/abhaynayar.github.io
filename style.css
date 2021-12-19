@@ -1,59 +1,59 @@
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-    margin: 50px auto;
-    padding: 20px; 
-    max-width: 400px;
-    font-family: monospace;
-    padding-bottom: 100px;
+  margin: 50px auto;
+  padding: 20px; 
+  max-width: 400px;
+  font-family: monospace;
+  padding-bottom: 100px;
 }
 
 @media (max-width: 400px) {
-    body {
-        margin: 25px auto;
-    }
+  body {
+    margin: 25px auto;
+  }
 }
 
 footer {
-    left: 0;
-    width: 100%;
-    bottom: 0;
-    height: 100px;
-    position: absolute;
-    text-align: center;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  height: 100px;
+  position: absolute;
+  text-align: center;
 }
 
 @media (max-width: 480px) {
-    footer {
-        height: 75px;
-    }
+  footer {
+    height: 75px;
+  }
 }
 
 footer img {
-    height: 16px;
-    margin: 8px;
+  height: 16px;
+  margin: 8px;
 }
 
 td, th {
-    padding: 5px;
+  padding: 5px;
 }
 
 p {
-    margin: 2em 0;
+  margin: 2em 0;
 }
 
 a {
-    color: teal;
+  color: teal;
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 #logo {
-    width: 64px;
-    margin-bottom: 20px;
+  width: 64px;
+  margin-bottom: 20px;
 }
