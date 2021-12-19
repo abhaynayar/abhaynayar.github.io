@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Realizing a Quine</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="../img/k173.png" type="image/gif" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+
+<!-- Code highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+
+<body>
+<a href="../index.html">
+<img src="../img/logo.svg" id="logo">
+</a>
+
+<h1>Realizing a Quine</h1>
+<h4>04/03/2019</h4>
+
+<p>
+A quine is a source program, that when compiled and executed, will produce
+as output an exact copy of its source. Of all languages I know, I am most
+well acquainted with C++, so I decided to realize a quine in it (only out
+of curiosity, since quines have little practical significance). I first
+read about quines in the 1983 Turing Award paper, and as soon as I did, I
+quickly got down to working on it. This made me come up with the following
+program:
+</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+
+int main()
+{
+
+    ifstream f;
+    f.open("quine.cpp");
+
+    string line;
+
+    while(getline(f,line))
+        cout &lt;&lt; line &lt;&lt; endl;
+
+    f.close();
+    return 0;
+}
+</code>
+</pre>
+
+<p>
+As I later realized, this obviously wasn't anything profound, so after a
+while, I came across the fact that "stepping outside the program" is
+considered as cheating. I had to create a program that took no input, and
+printed itself as an output. The first thing that came to mind was a single
+<b>cout</b> statement.
+</p>
+
+<p>Input</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main()
+{
+    std::cout &lt;&lt; "#include <iostream>\n#include <string>\nint main()\n{\n\tstd::cout &lt;&lt; \"";
+    return 0;
+}
+</code>
+</pre>
+
+<p>Output:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main()
+{
+	std::cout &lt;&lt; "
+</code>
+</pre>
+
+<p>
+But you can only go as far as that. Whatever you write inside the cout
+within the quotation marks, has to be printed as source itself. So, if you
+start writing the string #include &lt;ios... , just after the original
+string ended, by the time you get to the end of the modified string, you
+will have more characters to add. And when you add those characters, you
+will reach the end of the string again only to find more characters to add,
+and so on, it will stretch out till infinity.
+</p>
+
+<p>
+Thankfully, C++ helps us out, by allowing us to store strings in memory.
+What this means, is that instead of writing a string directly into the
+console, we can first store it in a variable. That variable's declaration,
+when encountered in code, can use its own content to print itself, thereby
+solving the recursive nature of the problem. So I came up with the
+following code:
+</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main()
+{
+    std::string s = "#include <iostream>\n#include <string>\nint main()\n{\n\tstd::string s = \"";
+    std::string r = "\n\tstd::cout &lt;&lt; s &lt;&lt; s &lt;&lt; \";\n\tstd::string r = \" &lt;&lt; r &lt;&lt; r;\n\treturn 0;\n}";
+    std::cout &lt;&lt; s &lt;&lt; s &lt;&lt; ";\n\tstd::string r = " &lt;&lt; r &lt;&lt; r;
+    return 0;
+}
+</code>
+</pre>
+
+<p>
+Here string s stores the source code up until its own declaration and
+string r stores the source code after its own declaration. When the two
+strings are finally printed using a cout statement, immediately after the
+printing of the string, the contents of the strings are printed as well.
+</p>
+
+<p>
+So this allows us to print the source as well as the statement that prints
+the source. The only drawback here is that when we are printing for the
+second time, characters get escaped, even though they shouldn't be. Now, if
+we remove the use of escape characters, we can have the entire code in one
+line, but even then, the include requires a newline character, so the
+escapes will need to be there.
+</p>
+
+<p>
+This is where I got stuck and started looking for solutions when I found
+something called <a
+href="https://www.geeksforgeeks.org/raw-string-literal-c/">raw</a> string
+literals (I had heard of raw strings in Python but not in C++). These
+strings help you put the characters as is. For example you can actually hit
+enter in the code, instead of typing in "\n".  So if you put in raw strings
+instead of regular strings, there is no difference between writing in code,
+and displaying on the console.
+</p>
+
+<p>So finally, a quine I could understand:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main()
+{
+std::string s = R"(#include <iostream>
+#include <string>
+int main()
+{
+    std::string s = )";
+    std::string r = R"(std::cout &lt;&lt; s &lt;&lt; "R\"(" &lt;&lt; s &lt;&lt; ")\";\nstd::string r = R\"(" &lt;&lt; r &lt;&lt; ")\";\n" &lt;&lt; r;})";
+    std::cout &lt;&lt; s &lt;&lt; "R\"(" &lt;&lt; s &lt;&lt; ")\";\nstd::string r = R\"(" &lt;&lt; r &lt;&lt; ")\";\n" &lt;&lt; r;
+}
+</code>
+</pre>
+
+<p>
+As I delved deeper into this topic I found some theoretical basis around <a
+href="http://www.madore.org/~david/computers/quine.html">quines</a> as
+opposed to the ad hoc approach outlined in this post.
+</p>
+
+</body>
+</html>

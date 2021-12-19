@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 
-<!-- Code highlighting  -->
+<!-- Code highlighting -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
@@ -19,8 +19,8 @@
 <img src="../img/logo.svg" id="logo">
 </a>
 
-<h2>XXE Injection - Cisco SecCon CTF</h2>
-<h5>2019-09-30</h5>
+<h1>XXE Injection - Cisco SecCon CTF</h1>
+<h4>30/09/2019</h4>
 
 <p>
 I scored a total of 3000 points out of 4100 in the Cisco SecCon CTF 2019.
@@ -32,13 +32,20 @@ web challenge called Autograph.
 The first thing we see on the website is a registration form. There is a
 script in the source code to package all the information and send it as
 XML. There is also a comment <b>&lt;!-- EVERYONE EXCEPT "ADMIN" CAN
-REGISTER FOR THE EVENT !--&gt;</b>. After reading the comment, I tried
-putting in the name field's value as admin and realized that in order to
-get back the email's value reflected to the webpage, we require the name
-field to have the value admin. For ANY value of email it reflects back the
-email (saying that it already exists). I tried entering the form on the
-webpage with some random values and intercepted the request through Burp.
-After seeing the XML in the request body, I thought of trying out an <a
+REGISTER FOR THE EVENT !--&gt;</b>.
+</p>
+
+<p>
+After reading the comment, I tried putting in the name field's value as
+admin and realized that in order to get back the email's value reflected to
+the webpage, we require the name field to have the value admin.
+</p>
+
+<p>
+For ANY value of email it reflects back the email (saying that it already
+exists). I tried entering the form on the webpage with some random values
+and intercepted the request through Burp.  After seeing the XML in the
+request body, I thought of trying out an <a
 href="https://portswigger.net/web-security/xxe">XXE</a> payload.
 </p>
 

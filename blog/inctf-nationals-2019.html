@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 
-<!-- Code highlighting  -->
+<!-- Code highlighting -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
@@ -19,8 +19,8 @@
 <img src="../img/logo.svg" id="logo">
 </a>
 
-<h2>InCTF Nationals 2019</h2>
-<h5>2020-01-26</h5>
+<h1>InCTF Nationals 2019</h1>
+<h4>26/01/2021</h4>
 
 <p><i>
 This is a summary of my experience at InCTF, followed by the challenge
@@ -108,16 +108,23 @@ elongated stress on the mind you wouldn't want to do anything, but coming
 </p>
 
 <hr>
+
 <h2>Writeups</h2>
+
+<p>
+<i>Grab the files for the below challenges <a
+href="../files/inctf-nationals-2019.zip">here</a>.</i>
+</p>
+
 <h3>Reverse Engineering</h3>
 <i>Hoth 200 pts.</i>
 
 <p>
-We are given a PE32 binary called <a
-href="../files/inctf/fin.exe">fin.exe</a>, but since we had to use the
-university computers (which had Ubuntu 16.04) I could only do a static
+We are given a PE32 binary called <b>fin.exe</b>, but since we had to use
+the university computers (which had Ubuntu 16.04) I could only do a static
 analysis. Below is a snippet of the main function, after getting the user
 input the program calls _check function.
+</p>
 
 <pre>
 <code class="x86asm">
@@ -179,10 +186,11 @@ Flag: <b>inctf{this_is_simpler_than_you_think}</b>
 
 <i>PartyPart 300 pts.</i>
 
-<p> We are given a 64-bit ELF binary called
-<a href="../files/inctf/Party_Part">Party_Part</a>.
-The program takes our input then does a string compare.
-If the string is not 42 (0x2a) characters long, it exits.
+<p>
+We are given a 64-bit ELF binary called <b>Party_Part</b>. The program
+takes our input then does a string compare.  If the string is not 42 (0x2a)
+characters long, it exits.
+</p>
 
 <pre>
 <code class="x86asm">
@@ -259,8 +267,8 @@ again.
 
 <pre>
 <code class="c">
-int first (char \*a1, int a2) {
-  for (i=0; i<6; ++i)
+int first (char *a1, int a2) {
+  for (i=0; i&lt;6; ++i)
     temp[i+a2] = a1[i] ^ 8;
   if (strncmp(tem, "afk|ns&lt;ea'pVvj5ar6ginTl&amp;znev:xy~R=kRd7cb&amp;z", a2 + 6))
     return 42;
@@ -343,11 +351,10 @@ Flag: <b>inctf{PHP_H45_M4NY_WAYS_TO_BE_EXPLOITED!!}</b>
 <i>The Dilemma 100 pts.</i>
 
 <p>
-We are given an encrypted zip <a
-href="../files/inctf/TheDilemma.zip">file</a>. At first I mistakenly used
-the compressed rockyou file :( to perform a dictionary attack, when it
-didn't work I gave up on the challenge. Later I saw that the challenge had
-many solves and realized my stupid mistake.
+We are given an encrypted zip file: <b>TheDilemma.zip</b>. At first I
+mistakenly used the compressed rockyou file :( to perform a dictionary
+attack, when it didn't work I gave up on the challenge. Later I saw that
+the challenge had many solves and realized my stupid mistake.
 </p>
 
 <pre>
@@ -378,11 +385,10 @@ Flag: <b>inctf{w0w_D0_Y0u_w4Nt_Th3_F0Rc3_t0_b3_w1Th_Y0u}</b>
 <i>Mos Espa - Tatooine 400 pts.</i>
 
 <p>
-In this challenge we get a PCAP <a
-href="../files/inctf/Chall.pcapng">file</a> and after some analysis using
-wireshark we see that a client is sending some kind of a POST request to a
-server repeatedly with different querybytes "abcdef", below is the last
-request in the series.
+In this challenge we get a PCAP: <b>Chall.pcapng</b> and after some
+analysis using wireshark we see that a client is sending some kind of a
+POST request to a server repeatedly with different querybytes "abcdef",
+below is the last request in the series.
 </p>
 
 <pre>
@@ -402,8 +408,8 @@ querybyte=f&amp;auth=8
 </pre>
 
 <p>
-In the end the server responds by saying `We've searched our database and 
-there is no flag starting with abcdef`
+In the end the server responds by saying "We've searched our database and 
+there is no flag starting with abcdef".
 </p>
 
 <p>
@@ -446,8 +452,7 @@ print(s.post(url,{"querybyte":"{","auth":j}).text)
 <h3>Android</h3>
 <i>Decode 200 pts.</i>
 
-We are given an APK <a href="../files/inctf/Decode.apk">file</a>. I
-decompiled it using jadx.
+We are given an APK: <b>Decode.apk</b>. I decompiled it using jadx.
 
 <pre>
 <code class="bash">
@@ -487,11 +492,11 @@ Flag: <b>inctf{nev3r_st0re_s3ns!tiv3_data_1n_7h3_s0urcec0de}</b>
 <i>Secret Service 200 pts.</i>
 
 <p>
-We get an APK <a href="../files/inctf/Secret_Service.apk">file</a>. Using
-jadx-gui I saw that the app's package name was
-<b>com.r4hu1.secretservice</b> and it had an activity which printed the
-flag for us. The activity name was <b>secretService</b>. We can launch
-exported activities using the adb shell as follows:
+We get an APK: <b>Secret_Service.apk</b>. Using jadx-gui I saw that the
+app's package name was <b>com.r4hu1.secretservice</b> and it had an
+activity which printed the flag for us. The activity name was
+<b>secretService</b>. We can launch exported activities using the adb shell
+as follows:
 </p>
 
 <pre>
@@ -512,9 +517,8 @@ Flag: <b>inctf{exp0rted_activities_ar3_harmful}</b>
 <i>Printer</i>
 
 <p>
-I solved this challenge after the CTF ended. We get a binary called <a
-href="../files/inctf/chall">chall</a>.  After decompiling it looked
-somewhat like this:
+I solved this challenge after the CTF ended. We get a binary called
+<b>chall</b>. After decompiling it looked somewhat like this:
 </p>
 
 <pre>
@@ -523,7 +527,6 @@ somewhat like this:
 #include &lt;fstream.h&gt;
 
 int Overwrite_Me = 0;
-
 int main() {
 
   printf("Please enter your name : ");
@@ -568,7 +571,6 @@ print payload
 </code>
 </pre>
 
-
 <pre>
 <code class="bash">
 $ python exploit.py | ./chall
@@ -579,7 +581,6 @@ You deserve this.
 Here, take you flag <b>inctf{this_is_a_dummy_flag}</b>
 </code>
 </pre>
-
 
 </body>
 </html>
