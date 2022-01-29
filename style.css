@@ -1,16 +1,28 @@
 @font-face {
-  font-family: calendas;
-  src: url(fonts/Calendas/Calendas.otf);
+  font-family: 'body';
+  src: url(fonts/IBMPlexSans-Regular.woff2);
+  font-display: swap;
 }
 
 @font-face {
-  font-family: calendas-italic;
-  src: url(fonts/Calendas/Calendas-Italic.otf);
+  font-family: 'body';
+  font-style: italic;
+  src: url(fonts/IBMPlexSans-Italic.woff2);
+  font-display: swap;
 }
 
 @font-face {
-  font-family: calendas-bold;
-  src: url(fonts/Calendas/Calendas-Bold.otf);
+  font-family: 'body';
+  font-weight: 800;
+  src: url(fonts/IBMPlexSans-Bold.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Calendas-Italic';
+  font-style: italic;
+  src: url(fonts/Calendas-Italic.woff2);
+  font-display: swap;
 }
 
 html {
@@ -22,9 +34,15 @@ body {
   color: black;
   margin: 50px auto;
   padding: 20px; 
-  max-width: 480px;
-  font-family: monospace;
-  padding-bottom: 100px;
+  max-width: 540px;
+  padding-bottom: 20px;
+
+  /* Font */
+  font: 18px/28px body, sans-serif;
+}
+
+h1 {
+  font-family: 'Calendas-Italic', serif;
 }
 
 @media (max-width: 400px) {
@@ -46,28 +64,24 @@ td, th {
   padding: 5px;
 }
 
-h1, h2 {
-  font-family: calendas-italic;
-}
-
-h3 {
-  font-family: calendas-bold;
-}
-
-h4, h5, h6 {
-  font-family: calendas;
-}
-
 p {
   margin: 2em 0;
 }
 
-a {
-  color: teal;
+code {
+  font-family: mono, monospace;
+  font-size: 14px;
+}
+
+.date {
+  color: rgba(0,0,0,0.55);
+  font-size: 14px;
+  margin-left: 4px;
 }
 
 img {
   max-width: 100%;
+  border-bottom: none;
 }
 
 #logo {
@@ -78,4 +92,23 @@ img {
 hr {
   height: 1px;
   background-color: black;
+}
+
+/* Underline links, but not those which are images */
+a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+}
+
+a:hover {
+  border-color: currentColor;
+}
+
+.icons * {
+  border: 0px;
+}
+
+body > a {
+  border: 0px; /* First link in each body is the logo. */
 }
