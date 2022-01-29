@@ -1,125 +1,143 @@
 @font-face {
-  font-family: 'body';
-  src: url(fonts/IBMPlexSans-Regular.woff2);
-  font-display: swap;
+    font-family: 'body';
+    src: url(fonts/IBMPlexSans-Regular.woff2);
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'body';
-  font-style: italic;
-  src: url(fonts/IBMPlexSans-Italic.woff2);
-  font-display: swap;
+    font-family: 'body';
+    font-style: italic;
+    src: url(fonts/IBMPlexSans-Italic.woff2);
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'body';
-  font-weight: 800;
-  src: url(fonts/IBMPlexSans-Bold.woff2);
-  font-display: swap;
+    font-family: 'body';
+    font-weight: 800;
+    src: url(fonts/IBMPlexSans-Bold.woff2);
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Calendas-Regular';
-  font-style: italic;
-  src: url(fonts/Calendas-Regular.woff2);
-  font-display: swap;
+    font-family: 'Calendas-Regular';
+    font-style: italic;
+    src: url(fonts/Calendas-Regular.woff2);
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Calendas-Italic';
-  font-style: italic;
-  src: url(fonts/Calendas-Italic.woff2);
-  font-display: swap;
+    font-family: 'Calendas-Italic';
+    font-style: italic;
+    src: url(fonts/Calendas-Italic.woff2);
+    font-display: swap;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  color: black;
-  margin: 50px auto;
-  padding: 20px; 
-  max-width: 540px;
-  padding-bottom: 20px;
-
-  /* Font */
-  font: 18px/28px body, sans-serif;
+    color: black;
+    margin: 50px auto;
+    padding: 20px; 
+    max-width: 540px;
+    padding-bottom: 20px;
+    
+    /* Font */
+    font: 18px/28px body, sans-serif;
 }
 
 h1 {
-  font-family: 'Calendas-Italic', serif;
+    font-family: 'Calendas-Italic', serif;
 }
 
 h2 {
-  font-family: 'Calendas-Regular', serif;
+    font-family: 'Calendas-Regular', serif;
 }
 
 @media (max-width: 400px) {
-  body {
-    margin: 25px auto;
-  }
+    body {
+        margin: 25px auto;
+    }
 }
 
 .icons {
-  margin: 24px 8px;
+    margin: 24px 8px;
 }
 
 .icons img {
-  height: 20px;
-  margin: 6px;
+    height: 20px;
+    margin: 6px;
 }
 
 td, th {
-  padding: 5px;
+    padding: 5px;
 }
 
 p {
-  margin: 2em 0;
+    margin: 2em 0;
 }
 
 code {
-  font-family: mono, monospace;
-  font-size: 14px;
+    font-family: mono, monospace;
+    font-size: 14px;
 }
 
 .date {
-  color: rgba(0,0,0,0.55);
-  font-size: 14px;
-  margin-left: 4px;
+    color: rgba(0,0,0,0.55);
+    font-size: 14px;
+    margin-left: 4px;
 }
 
 img {
-  max-width: 100%;
-  border-bottom: none;
+    max-width: 100%;
+    border-bottom: none;
 }
 
 #logo {
-  width: 64px;
-  margin-bottom: 20px;
+    width: 64px;
+    margin-bottom: 20px;
 }
 
 hr {
-  height: 1px;
-  background-color: black;
+    height: 1px;
+    background-color: black;
+}
+
+.blog {
+    margin-top: 50px;
 }
 
 /* Underline links, but not those which are images */
 a {
-  color: inherit;
-  text-decoration: none;
-  border-bottom: 2px solid rgba(0,0,0,0.2);
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
 }
 
 a:hover {
-  border-color: currentColor;
+    border-color: currentColor;
 }
 
 .icons * {
-  border: 0px;
+    border: 0px;
 }
 
 body > a {
-  border: 0px; /* First link in each body is the logo. */
+    border: 0px; /* First link in each body is the logo. */
+}
+
+/* Responsive table */
+.table {
+    width: 100%;
+    display: table;
+}
+
+.tr {
+    display: table-row;
+}
+
+.td {
+    display: table-cell;
 }
