@@ -19,6 +19,13 @@
 }
 
 @font-face {
+  font-family: 'Calendas-Regular';
+  font-style: italic;
+  src: url(fonts/Calendas-Regular.woff2);
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Calendas-Italic';
   font-style: italic;
   src: url(fonts/Calendas-Italic.woff2);
@@ -41,8 +48,12 @@ body {
   font: 18px/28px body, sans-serif;
 }
 
-h1, h2 {
+h1 {
   font-family: 'Calendas-Italic', serif;
+}
+
+h2 {
+  font-family: 'Calendas-Regular', serif;
 }
 
 @media (max-width: 400px) {
