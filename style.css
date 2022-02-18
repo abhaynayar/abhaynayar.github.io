@@ -141,3 +141,7 @@ body > a {
 .td {
     display: table-cell;
 }
+
+.notice {
+  background-color: yellow;
+}
