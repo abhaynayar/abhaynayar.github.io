@@ -115,7 +115,7 @@ following code:
 #include &lt;string&gt;
 int main()
 {
-    std::string s = "#include <iostream>\n#include <string>\nint main()\n{\n\tstd::string s = \"";
+    std::string s = "#include &lt;iostream&gt;\n#include &lt;string&gt;\nint main()\n{\n\tstd::string s = \"";
     std::string r = "\n\tstd::cout &lt;&lt; s &lt;&lt; s &lt;&lt; \";\n\tstd::string r = \" &lt;&lt; r &lt;&lt; r;\n\treturn 0;\n}";
     std::cout &lt;&lt; s &lt;&lt; s &lt;&lt; ";\n\tstd::string r = " &lt;&lt; r &lt;&lt; r;
     return 0;
@@ -158,7 +158,7 @@ and displaying on the console.
 #include &lt;string&gt;
 int main()
 {
-std::string s = R"(#include <iostream>
+std::string s = R"(#include &lt;iostream&gt;
 #include &lt;string&gt;
 int main()
 {
