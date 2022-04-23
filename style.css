@@ -48,11 +48,7 @@ body {
     font: 18px/28px body, sans-serif;
 }
 
-h1 {
-    font-family: 'Calendas-Italic', serif;
-}
-
-h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Calendas-Regular', serif;
 }
 
@@ -144,4 +140,12 @@ body > a {
 
 .notice {
   background-color: yellow;
+}
+
+figcaption {
+  color: grey;
+  max-width: 100%;
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
 }
