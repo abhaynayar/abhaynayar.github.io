@@ -30,20 +30,20 @@ web challenge called Autograph.
 </p>
 
 <p>
-The first thing we see on the website is a registration form. There is a
+The first thing I saw on the website was a registration form. There was a
 script in the source code to package all the information and send it as
-XML. There is also a comment <i>&lt;!-- EVERYONE EXCEPT "ADMIN" CAN
+XML. There was also a comment <i>&lt;!-- EVERYONE EXCEPT "ADMIN" CAN
 REGISTER FOR THE EVENT !--&gt;</i>.
 </p>
 
 <p>
 After reading the comment, I tried putting in the name field's value as
 admin and realized that in order to get back the email's value reflected to
-the webpage, we require the name field to have the value admin.
+the webpage, the name field had to have the value "admin".
 </p>
 
 <p>
-For ANY value of email it reflects back the email (saying that it already
+For ANY value of email, it reflected back the email (saying that it already
 exists). I tried entering the form on the webpage with some random values
 and intercepted the request through Burp.  After seeing the XML in the
 request body, I thought of trying out an <a
@@ -66,9 +66,9 @@ href="https://portswigger.net/web-security/xxe">XXE</a> payload.
 
 <p>
 The payload worked, as the <b>/etc/passwd</b> contents were returned. Now
-we can browse around the server and see what all things there are. After
-scratching my head for a while, I remembered that the XML data is being
-submitted to process.php (the same file the XML data is posted to).
+I could browse around the server. After scratching my head for a while, I
+remembered that the XML data is being submitted to process.php (the same
+file the XML data is posted to).
 </p>
 
 <p>
@@ -98,7 +98,7 @@ response.
 After getting the base64 encoded string, I decoded it and saw the contents
 of the process.php file. The first line contained an include to another
 file. Using the same technique as before, I got the source of the newly
-found file. 
+found file which had the flag.
 </p>
 
 <p>

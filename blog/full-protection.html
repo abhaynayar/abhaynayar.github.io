@@ -43,17 +43,20 @@ $ checksec ./chall
 
 
 <p>
+
 Here is what these protections mean (roughly):
 
 <ul>
-
 <li>RELRO ensures that the GOT can't be overwritten.</li>
-<li>Canary ensures that the return address can't be overwritten so we can't control RIP</li>
-<li>NX bit ensures that each segment is W^X[2], so we can't run our shellcode on the stack.</li>
+<li>Canary ensures that the return address can't be overwritten so we can't
+control RIP.</li>
+<li>NX bit ensures that each segment is W^X, so we can't run our shellcode
+on the stack.</li>
 <li>PIE ensures that the binary base is different each time we run it.</li>
-<li>FORTIFY ensures that functions like printf don't get to read memory into far off places.</li>
-
+<li>FORTIFY ensures that functions like printf don't get to read memory
+into far off places.</li>
 </ul>
+
 </p>
 
 <p>
@@ -65,7 +68,9 @@ Ghidra. Looks like an infinite loop of reading and echoing user input.
 <code class="c">
 undefined8 main(void)
 {
+
   -snip-
+
   while(true) {
     iVar1 = readline(&amp;local_58,0x40);
     if (iVar1 == 0) break;
@@ -136,8 +141,8 @@ But the interesting thing is that while strlen terminates after
 encountering a null byte, gets stops at newlines. So for example if our
 input is \x00AAAA\n, strlen will say that the length is zero, but the four
 A's will still be stored on the stack. So we can trick the length check and
-overflow the return address of the main function (since the buffer is
-stored in main, readline only contains the pointer to it). The amount of
+overflow the return address of the main function — since the buffer is
+stored in main, readline only contains the pointer to it. The amount of
 characters to input in order to redirect the control flow was figured out
 using dynamic analysis through gdb.
 </p>
@@ -168,15 +173,15 @@ rax            0x8307ee9bdbab600   590111093561144832
 </pre>
 
 <p>
-We can see that the canary value is 0x8307ee9bdbab600 now we can keep on
-putting %p's in our format string until we see the canary echoed back to
-us. Once we have that, we can write the canary onto the stack with the gets
-overflow, to prevent stack smashing detection.
+We can see that the canary value is 0x8307ee9bdbab600. Now we can keep on
+putting %p in our format string until we see the canary echoed back to us.
+Once we have that, we can write the canary onto the stack with the gets
+overflow to prevent stack smashing detection.
 <p>
 
 </p>
 Now that we can point RIP to anything we want, we still have some issues.
-Since the binary's and libc's address keep changing on each execution, we
+Since the binary's and libc's addresses keep changing on each execution, we
 need to first leak their bases. This can be done using the format string
 vulnerability as well. After some more time with gdb, I figured out that
 the canary is at offset 12 and the binary is at offset 18 from the format
@@ -194,10 +199,10 @@ Once we have libc for our ROP, we can easily spawn a shell by passing
 <p>
 A few things to keep in mind:
 <ul>
-<li>Make sure to call system not just jump to it.</li>
+<li>Make sure to call system, not just jump to it.</li>
 <li>libc can be leaked directly from the stack, no need to leak binary.</li>
-<li>Canaries can be found using the canary command in some gdb wrappers.</li>
 <li>This binary uses an alarm which makes it harder to debug so patch it.</li>
+<li>Canaries can be found using the canary command in some gdb wrappers.</li>
 </ul>
 </p>
 

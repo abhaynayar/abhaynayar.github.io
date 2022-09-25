@@ -29,7 +29,7 @@ I exploited in <a href="https://ctftime.org/event/869">NaCTF 2019</a>.
 First I'm going to look at the challenge <b>fmt0</b>.
 </p>
 
-<h3>fmt0</h3>
+<h2>fmt0</h2>
 
 <pre>
 <code>
@@ -79,8 +79,8 @@ buf.
 
 <p>
 We get our cue for a format string vulnerability as soon as we observe that
-buf is being put into printf as an argument (in the vuln function). If it
-were in this form: printf("%s",buf);, our printf would have been safe, but
+buf is being put into printf as an argument in the vuln function. If it
+were in the form of printf("%s",buf), our printf would have been safe, but
 since the developer didn't put any format string specifiers on his own, we
 can exploit this program. Our goal is to read the contents of the flag
 array that is kept in the stack frame of the main function. Let's start
@@ -140,10 +140,10 @@ starting point of our string.
 <p>
 Now, if you recall, our goal was to read the flag that is kept in the stack
 frame of the main function. We can do this the better way the help of gdb
-or we can do it the crappy way using hit and try (like I did). So I kept
-increasing the number of %08x's looking for ASCII values. Then I stumbled
+or we can do it the crappy way using hit and try like I did. So I kept
+increasing the number of %08x looking for ASCII values. Then I stumbled
 upon the offset format specifier which I coupled up with a python loop to
-get the contents of memory addresses that flag spans.
+get the contents of memory addresses that the flag spans.
 </p>
 
 <pre>
@@ -155,21 +155,21 @@ Type something&gt;You typed: a7d6761 6c665f79 6d6d7564 5f735f72 6179616e 5f79616
 
 <p>
 The %[num][fs]$ helps us use the format specifier fs at an offset num from
-the beginning of where we start	reading the stack. We need this, since our
-string isn't long enough to reach flag using %08x's. We can see that the
+the beginning of where we start	reading the stack. We need this since our
+string isn't long enough to reach flag using %08x. We can see that the
 values that we are getting are in the ASCII range,	so we head up to a hex
 to ASCII converter online and get it converted.
 </p>
 
 <p>
 You might have noticed that I am running the loop backwards from 40 to 30.
-This is because of little-endianness. For example if you store ABCD EFGH on
-a stack and later retrieve it, it will be something like DCBA HGFE. So the
-individual bytes are reversed, but not the entire word. Therefore in order
-to retrieve it, I go in reverse order and I get HGFE DCBA which can then be
-easily reverse to get the original order. Keep in mind that all of this can
-be done using an elegant python script, but I was lazy so I just hacked it
-together.
+This is because of little-endianness. For example, if you store ABCD EFGH
+on a stack and later retrieve it, it will be something like DCBA HGFE. So
+the individual bytes are reversed, but not the entire word. Therefore in
+order to retrieve it, I go in reverse order and I get HGFE DCBA which can
+then be easily reverse to get the original order. Keep in mind that all of
+this can be done using an elegant python script, but I was lazy so I just
+hacked it together.
 </p>
 
 <pre>
@@ -182,8 +182,8 @@ galf_ymmud_s_rayan_yahba_si_siht{ftcan
 <p>
 I spliced out the first two bytes since they were garbage values. Now, we
 need to reverse the string once more to get the final flag. And we are
-again going to use an online tool (because we don't know how to reverse a
-string in any other efficient way).
+again going to use an online tool because we don't know how to reverse a
+string in any other efficient way.
 </p>
 
 <pre>
@@ -193,9 +193,10 @@ nactf{this_is_abhay_nayar_s_dummy_flag
 </pre>
 
 <p>
-This is the value that I wrote in the file flag.txt that I created in the
-beginning. I also had a closing bracket but apparently I made an off by one
-error. Now we just need to run this on the server to get the flag.
+This is the value that I wrote in the file called flag.txt that I created
+in the beginning. I also had a closing bracket, but apparently I made an
+off by one error. Now we just need to run this on the server to get the
+flag.
 </p>
 
 <pre>
@@ -206,10 +207,13 @@ $ python -c 'for i in range(31,41): print("%"+str(i)+"$x "),' | nc shell.2019.na
 
 <p>
 After some formatting and hacking around:<br>
+</p>
+
+<p>
 Flag: <b>nactf{Pr1ntF_L34k_m3m0ry_r34d_nM05f469}</b>
 </p>
 
-<h3>fmt1</h3>
+<h2>fmt1</h2>
 
 <pre>
 <code class="c">
@@ -268,8 +272,8 @@ int main()
 <p>
 This is a slightly modified version of the above challenge. The key thing
 to note is that now the flag is being read from a file only after we pass
-the condition check num == 42. So somehow we need to modify the the value
-of num. 
+the condition check num == 42. So somehow we need to modify the value of
+num. 
 </p>
 
 <p>
@@ -299,20 +303,20 @@ With this information in mind, we realize that we need two things:
 </p>
 
 <p>
-Luckily we don't have to go to the main's stack to change num. In fact, the
-address of num keeps changing, so we can only use the pointer to num.  The
-second address can easily be figured out by entering some recognizable
+Luckily, we don't have to go to the main's stack to change num. In fact,
+the address of num keeps changing, so we can only use the pointer to num.
+The second address can easily be figured out by entering some recognizable
 sequence such as "AAAAABBBB...%x.%x." and then inspecting the memory
 immediately after the buffer is filled.
 </p>
 
 <p>
 With these two addresses, we can get the offset value and using the same
-technique as above this time with the %n specifier, we can write the value.
-After some inspection with gdb, I figured out the the offset was 24. So
+technique as above, this time with the %n specifier we can write the value.
+After some inspection with gdb, I figured out that the offset was 24. So
 instead of printing the exact address, we could get the offset. We were
-lucky to have num passed as an argument to the function (even though it
-serves no other purpose than to help us solve the challenge).
+lucky to have num passed as an argument to the function even though it
+serves no other purpose than to help us solve the challenge.
 </p>
 
 <pre>

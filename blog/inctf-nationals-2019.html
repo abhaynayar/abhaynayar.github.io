@@ -41,7 +41,7 @@ or professional) you qualify for the three-day conference held in the last
 week of December.
 </p>
 
-<h3>Day one</h3>
+<h2>Day one</h2>
 
 <p>
 There were lots of amazing talks. I loved the talk on Digital Forensics by
@@ -57,7 +57,7 @@ opportunity to participate in InCTF Nationals, I highly recommend you to do
 so just to be around some really awesome hackers.
 </p>
 
-<h3>Day two</h3>
+<h2>Day two</h2>
 
 <p>
 On the second day, we had an attack-defense CTF. This was my first time
@@ -73,13 +73,13 @@ We also had talks and hacking stalls. Personally, I didn't get a lot of
 time in the hacking stalls, but from the little time I spent roaming around
 I could see various cool things such as a lock-picking, car hacking, and
 some hardware-related stalls. They even had their own hardware badge for
-the hardware CTF (which in retrospect I wish I had participated in).
+the hardware CTF — which in retrospect I wish I had participated in.
 </p>
 
-<h3>Day three</h3>
+<h2>Day three</h2>
 
 <p>
-For the final CTF, the problem-set was relatively easy so the most
+For the final CTF, the problem-set was relatively easy, so the most
 important thing to keep in mind was the workflow. Though I had worked a lot
 on my workflow leading up to the CTF, they didn't allow us to use our own
 systems so I had a lot of small issues with the tooling. They wanted us to
@@ -97,12 +97,11 @@ scoreboard and I was 2nd.
 </p>
 
 <p>
-The CTF roughly ran from 9AM to 4PM and for people who where over
-enthusiastic about it, we didn't even go for lunch. We ate some stuff that
-they brought in for us in the lab :) you can imagine that after such an
-elongated stress on the mind you wouldn't want to do anything, but coming
-2nd gave me some energy to stay awake for the rest of the day.
-</p>
+The CTF roughly ran from 9AM to 4PM and the people who were
+over-enthusiastic about it, we didn't even go for lunch — we just ate some
+stuff that they brought in for us in the lab :). You can imagine that after
+such an elongated stress on the mind you wouldn't want to do anything, but
+coming 2nd gave me some energy to stay awake for the rest of the day.  </p>
 
 <h2>Writeups</h2>
 
@@ -250,9 +249,9 @@ arguments) and our input number.
 </p>
 
 <p>
-The switch case is especially curious since it is wrapped by a loop that
-runs eight times so it would seem we would hit the same case again and
-again.
+The switch case is especially interesting since it is wrapped by a loop
+that runs eight times, so it would seem we would hit the same case again
+and again.
 </p>
 
 <pre>
@@ -274,14 +273,14 @@ input string and compares it with the first six characters of:
 </p>
 
 <p>
-It returns 42 if the string mismatches else it returns 6. This makes the
+It returns 42 if the string mismatches, else it returns 6. This makes the
 switch statement clearer. Case 42 calls loses() while case 6 calls
 second().  Other ordinal functions have similar structure, the only
 difference being the operation used before comparison.
 </p>
 
 <p>
-So in total we have seven functions each working on the same string but
+So in total we have seven functions each working on the same string, but
 performing different operations on different chunks (of six characters).
 </p>
 
@@ -303,7 +302,7 @@ print(''.join(b))
 </pre>
 
 <p>
-Flag: <b>inctf{Enj0y_th3_p4rty_w1th_p4rts_0f_c0de!}</b>
+Flag: <b>inctf{Enj0y_th2_p4rty_w1th_p4rts_0f_c0de!}</b>
 </p>
 
 <h3>Web Exploitation</h3>
@@ -339,7 +338,7 @@ Flag: <b>inctf{PHP_H45_M4NY_WAYS_TO_BE_EXPLOITED!!}</b>
 <i>The Dilemma 100 pts.</i>
 
 <p>
-We are given an encrypted zip file: <b>TheDilemma.zip</b>. At first I
+We are given an encrypted zip file: <b>TheDilemma.zip</b>. At first, I
 mistakenly used the compressed rockyou file :( to perform a dictionary
 attack, when it didn't work I gave up on the challenge. Later I saw that
 the challenge had many solves and realized my stupid mistake.
@@ -367,7 +366,7 @@ wrote extracted data to "flag.txt".
 </pre>
 
 <p>
-Flag: <b>inctf{w0w_D0_Y0u_w4Nt_Th3_F0Rc3_t0_b3_w1Th_Y0u}</b>
+Flag: <b>inctf{w0w_D0_Y0u_w4Nt_Th2_F0Rc3_t0_b3_w1Th_Y0u}</b>
 </p>
 
 <i>Mos Espa - Tatooine 400 pts.</i>
@@ -396,22 +395,22 @@ querybyte=f&amp;auth=8
 </pre>
 
 <p>
-In the end the server responds by saying "We've searched our database and 
-there is no flag starting with abcdef".
+In the end, the server responds by saying: "We've searched our database and 
+there is no flag starting with abcdef"
 </p>
 
 <p>
 So this gives us the hint that we need the querybyte parameter to represent
 the flag format prefix, i.e. inctf. After going to the website and trying
-it, we are able to do it, but at the end of it we get a timeout error. We
+it, we are able to do it, but at the end of it, we get a timeout error. We
 are also slowed down by the fact that after every request, we get an
 auth-code which we have to enter in the next query request (as can be seen
 in the above request).
 </p>
 
 <p>
-Because of the above restrictions I made a small script that allowed me to
-perform the actions faster to prevent a timeout. I could have fully
+Because of the above restrictions, I made a small script that allowed me to
+perform the actions faster and prevent a timeout. I could have fully
 automated it, but I wasn't very confident due to the time constraints so I
 used this ad-hoc solution.
 </p>
@@ -439,7 +438,13 @@ print(s.post(url,{"querybyte":"{","auth":j}).text)
 <h3>Android</h3>
 <i>Decode 200 pts.</i>
 
-We are given an APK: <b>Decode.apk</b>. I decompiled it using jadx.
+<p>
+We are given an APK: <b>Decode.apk</b>.
+</p>
+
+<p>
+I decompiled it using jadx.
+</p>
 
 <pre>
 <code class="bash">
@@ -473,7 +478,7 @@ We can see that there is some secret key logged in base64 format.
 </p>
 
 <p>
-Flag: <b>inctf{nev3r_st0re_s3ns!tiv3_data_1n_7h3_s0urcec0de}</b>
+Flag: <b>inctf{nev3r_st0re_s3ns!tiv3_data_1n_7h2_s0urcec0de}</b>
 </p>
 
 <i>Secret Service 200 pts.</i>

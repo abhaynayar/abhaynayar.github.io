@@ -58,21 +58,23 @@ $ vi MyPlatformer.java
 </pre>
 
 <p>
-In this file there are a few important methods that I have surmised below:
+In this file, there are a few important methods:
 
 <ul>
-<li><b>create()</b>: sets up the stage for the game</li>
-<li><b>checkFlag()</b>: checks the state of each brick, if it matches the solution state, the game map changes to show the flag</li>
-<li><b>updateKoala()</b>: checks for user input and changes the state of the dino</li>
+<li><b>create()</b>: sets up the stage for the game.</li>
+<li><b>checkFlag()</b>: checks the state of each brick, if it matches the
+solution state, the game map changes to show the flag.</li>
+<li><b>updateKoala()</b>: checks for user input and changes the state of
+the dino.</li>
 </ul>
+</p>
 
 <p>
 In order to get to <b>checkFlag()</b> we need to satisfy a certain
-condition in </b>updateKoala()</b>. That is, if we hit a certain brick
-whose "state" is 1337, we execute the <b>checkFlag()</b> method. If it is
-not, then we just cycle the brick through the following "states": 0, 21, 97
-and 37. So whenever we hit a brick, it keeps changing colour in a
-four-colour cycle.
+condition in <b>updateKoala()</b>. That is, if we hit a certain brick whose
+state is 1337, we execute the <b>checkFlag()</b> method. If it is not, then
+we just cycle the brick through the following states: 0, 21, 97 and 37. So
+whenever we hit a brick, it keeps changing colour in a four-colour cycle.
 </p>
 
 <pre>
@@ -89,6 +91,7 @@ if (intValue == 1337) {
     } else if (intValue == 97) {
         intValue = 37;
     } else if (intValue == 37) {
+
 -snip-
 </code>
 </pre>
@@ -123,14 +126,16 @@ private void checkFlag() {
         i++;
         i2 = i3;
     }
+
 -snip-
 </code>
 </pre>
 
 <p>
 In the beginning of the method, we run a 100 * 100 loop going through each
-tile in our world. We check if the tile is a question mark type tile and if
-it is, we store its state (0, 21, 97 or 37) in an array called <b>bArr</b>. 
+tile in our world. We check if the tile is a question mark type tile, and
+if it is, we store its state (0, 21, 97 or 37) in an array called
+<b>bArr</b>. 
 </p>
 
 <pre>
@@ -148,7 +153,7 @@ if (toHex(messageDigest.digest()).equals("024800ace2ec394e6af68baa46e81dfbea93f0
 </pre>
 
 <p>
-Once <b>bArr</b> is populated, we hash it along with the given salt and
+Once <b>bArr</b> is populated, we hash it along with the given salt, and
 check if it matches the solution state of bricks. So essentially, we need
 to find out the states of the bricks that make <b>bArr</b> emit this
 particular hash. Since we have just four states per brick, brute forcing is
@@ -213,15 +218,16 @@ $ java brute
 </pre>
 
 <p>
-Once we run the bruteforce program, we get the value of <b>bArr</b> and now
-if we want, we can go around the game putting each brick in its
-corresponding state and get the flag. However, we can also reverse the rest
-of the method and see what it does.
+Once we run the bruteforce program, we get the value of <b>bArr</b>. Now if
+we want, we can go around the game putting each brick in its corresponding
+state and get the flag. However, we can also reverse the rest of the method
+and see what it does.
 </p>
 
 <pre>
 <code class="java">
 -snip-
+
 if (toHex(messageDigest.digest()).equals("024800ace2ec394e6af68baa46e81dfbea93f0f6730610560c66ee9748d91420")) {
     try {
         messageDigest.update(bArr);
@@ -322,8 +328,7 @@ $ java idk &gt; map_flag.tmx
 </pre>
 
 <p>
-Once we have the tmx file, we can open it using <a
-href="https://www.mapeditor.org">Tiled</a>.
+Once we have the tmx file, we can open it using <a href="https://www.mapeditor.org">Tiled</a>.
 </p>
 
 <img src="../img/prehistoric-mario-tiled.png">

@@ -33,13 +33,13 @@ previously programmed.
 </p>
 
 <p>
-The source code for my CHIP-8 emulator can be found: <a
-href="https://github.com/abhaynayar/genesis/blob/master/userland/Chip8.jack">here</a>.
+Note: I have not implemented the entire emulator. My goal was to make a
+sample CHIP-8 program run on it.
 </p>
 
 <p>
-Note: I have not implemented the entire emulator. My goal was to make a
-sample CHIP-8 program run on it.
+The source code for this CHIP-8 emulator can be found
+<a href="https://github.com/abhaynayar/genesis/blob/master/userland/Chip8.jack">here</a>.
 </p>
 
 <p>
@@ -65,7 +65,8 @@ class Chip8 {
 <p>
 CHIP-8 has 16 data registers that we have declared as the array V. It also
 has an address register called I. Then we also have the program counter PC
-the points to the address in memory that we are supposed to interpret next.
+that points to the address in memory that we are supposed to interpret
+next.
 </p>
 
 <p>
@@ -110,21 +111,21 @@ function void init() {
 </pre>
 
 <p>
-The Jack language doesn't have an inbuilt constructors. So we will later
-call the `init()` function within our main function.
+The Jack language doesn't have constructors. So we will later call the
+init() function within our main function.
 </p>
 
 <p>
 The CHIP-8 display is 64x32 pixels in size. Given starting co-ordinates bx
 and by, we use the below function to draw a 64x32 screen somewhere within
-the screen. For that we use the inbuilt `Screen` class in the Jack
-operating system.
+the screen. For that we use the inbuilt Screen class in the Jack operating
+system.
 </p>
 
 <p>
-In the below function, we only draw an outline for 64x32 anywhere within
-our 512x256 screen from the nand2tetris emulator. You can see the four
-lines being drawn.
+In the below function, we only draw an outline for 64x32, anywhere within
+our 512x256 screen, from the nand2tetris emulator. You can see the four
+lines being drawn:
 </p>
 
 <pre>
@@ -142,7 +143,7 @@ function void drawBox() {
 <p>
 When we are drawing within the CHIP-8 frame on the screen, we also need a
 translation layer for getting and setting the pixels. (We need to get
-pixels since CHIP-8 has a XORing functionality that requires the previous
+pixels since CHIP-8 has an XORing functionality that requires the previous
 pixel state to be known).
 </p>
 
@@ -166,13 +167,13 @@ function boolean getGfx(int row, int column) {
 
 <p>
 The issue with the Jack operating system is that we don't have any
-filesystems. For this I have made a hacky `Disk` class that mimicks a
+filesystems. For this I have made a hacky Disk class that mimicks a
 filesystem read.
 </p>
 
 <p>
-Using this, we read the file on Disk into our RAM as shown in the
-`loadRom()` method below.
+Using this, we read the file on Disk into our RAM as shown in the loadRom()
+method below:
 </p>
 
 <pre>
@@ -191,7 +192,7 @@ function void loadRom() {
 </pre>
 
 <p>
-We then also implement a `fetch()` method that will fetch us the current
+We then also implement a fetch() method that will fetch us the current
 instruction at the program counter PC.
 </p>
 
@@ -251,10 +252,10 @@ function void setVF(int x) {
 </pre>
 
 <p>
-Finally, we get to the core of the emulator - the fetch, decode and execute
-loop. Below I have only left out a few parts of the code for a high-level
-overview. You can read the entire code in the link given at the beginning
-of this blog post.
+Finally, we get to the core of the emulator — the fetch, decode, execute
+loop. Below, I have only included a few parts of the code to give a
+high-level overview. You can read the entire code in the link given at the
+beginning of this blog post.
 </p>
 
 <pre>
@@ -284,12 +285,12 @@ If you want to follow along, the opcode table for CHIP-8 can be found
 </p>
 
 <p>
-Remember, some of the opcodes have not been implemented, either due to
-limitations of the Jack system, or because it was not necessary for the
+Remember, some of the opcodes have not been implemented — either due to
+the limitations of the Jack system, or because it was not necessary for the
 sample program.
 </p>
 
-<h3>Opcode implementation code snippets</h3>
+<h2>Opcode implementation code snippets</h2>
 
 <p>
 Opcodes 00E0 and 00EE.
@@ -651,10 +652,10 @@ if (upper=15) {
 </code>
 </pre>
 
-<h3>Conclusion</h3>
+<h2>Conclusion</h2>
 
 <p>
-At the end of the loop, we increment the program counter by two since one
+At the end of the loop, we increment the program counter by two, since one
 memory cell is 8-bit in size, and one instruction is 16-bit.
 </p>
 
@@ -665,7 +666,7 @@ let PC = PC+2;
 </pre>
 
 <p>
-So that was the entire code. I was able to run the `zero.ch8` program which
+So that was the entire code. I was able to run the zero.ch8 program which
 is the four letters "ZERO" bouncing up and down within the CHIP-8 screen.
 (albeit very slowly)
 </p>

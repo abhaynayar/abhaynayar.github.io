@@ -47,26 +47,26 @@ LOAD:804806B       retf
 </pre>
 
 <p>
-The <b>retf</b> instruction at the end pops the IP followed by the CS
+The <b>retf</b> instruction at the end pops the IP, followed by the CS
 register.  Looking at the preceding instructions, we can see that the value
-of CS register becomes <b>0x33</b> and that of IP becomes <b>0x804806c</b>
+of CS register becomes <b>0x33</b> and that of IP becomes <b>0x804806c</b>,
 which is actually the next instruction in the code.
 </p>
 
 <p>
-However, IDA fails to identify it as code. After doing some research I came
-across the fact that when CS is set to <b>0x33</b> the instructions are
-interpreted as 64-bit. You can read more about it <a
+However, IDA fails to identify it as code. After doing some research, I
+came across the fact that when CS is set to <b>0x33</b> the instructions
+are interpreted as 64-bit. You can read more about it <a
 href="http://scrammed.blogspot.com/2014/10/code-obfunscation-mixing-32-and-64-bit.html">here</a>.
 Another interesting artefact of interpreting the code as 64-bit with IDA
 thinking it as 32-bit is that we see a lot of <b>dec eax</b> instructions.
 Coincidentally I remembered a <a
-href="https://twitter.com/struppigel/status/1208027470399713280">Tweet</a>
+href="https://twitter.com/struppigel/status/1208027470399713280">tweet</a>
 related to this that I had stored in my bookmarks.
 </p>
 
 <p>
-So, in order to understand the code, we need IDA to interpret it as 64-bit.
+So in order to understand the code we need IDA to interpret it as 64-bit.
 We can do this by selecting the area that we want to generate code for (in
 the text-view) then going to <b>Edit &gt; Segment &gt; Create Segment</b>.
 In the dialog box that follows, make sure to select 64-bit segment. Once we
@@ -133,10 +133,10 @@ _32seg:8048114 _32seg          ends
 </pre>
 
 <p>
-After we have the "right" code, the program is trivially easy to crack. It
+After we have the right code, the program is trivially easy to crack. It
 checks the user input against the XOR of a set of values in the data
-section (at address <b>0x80481C3</b>) with a rotating value in a register
-(all of this is included in the code above).
+section at address <b>0x80481C3</b>, with a rotating value in a register
+— all of this is included in the code above.
 </p>
 
 <p>

@@ -28,12 +28,12 @@ We are given a binary file called reversing. Below I've written about some
 important things about the functions in the given file.
 </p>
 
-<h3>reverse()</h3>
+<h2>reverse()</h2>
 
 <p>
 Length of the function: 0x6000b0 - 0x6000e4. This function swaps all bytes
 in _start(). So if _start() looks like 0xabcdefgh, it is turned into
-0xghefcdab. Everytime we jump into this function and go back we'll see
+0xghefcdab. Everytime we jump into this function and go back, we see
 different code for _start(). This is a self modifying program. So it is
 much easier to do a dynamic analysis. Below is the pseudocode which
 performs the swap.
@@ -58,13 +58,13 @@ for (ecx=0x6a; rcx &gt;=0; rcx--) {
 </code>
 </pre>
 
-<h3><_start()></h3>
+<h2><_start()></h2>
 
 <p>
 Length of the function: 0x6000e5 - 0x6001ca. This function makes calls to
-reverse() at almost every other line. rbx always points at reverse() we
-call reverse() using <b>call rbx</b>. But I have removed the calls to rbx
-below for code readability. rsi points at user input (size of user input is
+reverse() at almost every other line. rbx always points at reverse(). We
+call reverse() using <b>call rbx</b>. I have removed the calls to rbx below
+for code readability. rsi points at user input (size of user input is
 0x25=37 excluding newline). rdx starts decrementing from 0x25 to 0x00
 (excluding newline). This function loops 0x25 times using rdx, going
 through our input.
@@ -85,11 +85,11 @@ through our input.
 <p>
 Now once the init code in _start() is executed we fall into this loop.
 This is the most important part of the program. Here we see that our input
-is being moved into cl and first xored with one byte from memory then added
-to another byte from memory. These come from <b>[rdx+0x600194]</b>.  You'll
-see that both the fragments are exactly the same. However there are also
-calls to reverse() that I have omitted for clarity. Those calls swap the
-contents of the bytes used to build the flag check.
+is being moved into cl and is first xored with one byte from memory then
+added to another byte from memory. These come from <b>[rdx+0x600194]</b>.
+You'll see that both the fragments are exactly the same. However, there are
+also calls to reverse() that I have omitted for clarity. Those calls swap
+the contents of the bytes used to build the flag check.
 </p>
 
 <pre>
@@ -100,7 +100,9 @@ contents of the bytes used to build the flag check.
   69      or      rdi, rcx
   74      dec     dl
   78      jns     0x600171 [_start+140]
+
 -snip-
+
   140     mov     cl, BYTE PTR [rsi+rdx*1]
   145     xor     cl, BYTE PTR [rdx+0x600194]
   153     add     cl, BYTE PTR [rdx+0x600194]
@@ -110,9 +112,9 @@ contents of the bytes used to build the flag check.
 </code>
 </pre>
 
-<h3>_start(): after the loop</h3>
+<h2>_start(): after the loop</h2>
 
-<p>... we branched after 78 (the calls to reverse are snipped)</p>
+<p>... we branched after 78. (the calls to reverse are snipped)</p>
 
 <pre>
 <code class="x86asm">
@@ -128,14 +130,15 @@ contents of the bytes used to build the flag check.
 128     syscall                 ; write "wrong\n"
 ???     mov     al, 0x3c
 136     syscall                 ; exit
+
 -snip-
 </code>
 </pre>
 
 <p>
-I didn't completely understand the check above, if someone understood this
+I didn't completely understand the check above, if someone understood this,
 please let me know. But using the same operation as the one performed in
-the program, we see that the "right" bytes result in a zero once xored and
+the program, we see that the right bytes result in a zero once xored and
 added.
 </p>
 
@@ -149,7 +152,7 @@ T       0x54    0x0f    0xa5
 F       0x46    0x6b    0xd3
 {       0x7b    0x7c    0xff
 
-... this portion is evaled using the script below
+//... this portion is evaled using the script below
 
 }       0x7d    0xbb    0x32
 \n      0x0a    0xdb    0x58

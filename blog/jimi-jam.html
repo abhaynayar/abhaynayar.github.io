@@ -23,7 +23,7 @@
 <h1>Jimi Jam - Square CTF</h1>
 <h4>November 15, 2020</h4>
 
-<h3>Overview</h3>
+<h2>Overview</h2>
 
 <p>
 This is a binary exploitation challenge.
@@ -50,21 +50,20 @@ void vuln(void) {
 </pre>
 
 <p>
-In the challenge zip you can also find the library that is being used on
-the server, which coincidentally is the same as the one on my system
-(Ubuntu 20.04) so as long as I get a shell locally, it should work remotely
-as well.
+In the challenge zip we were also given the library that was being used on
+the server, which coincidentally was the same as the one on my system
+(Ubuntu 20.04). So as long as I get a shell locally, it should work
+remotely as well.
 </p>
 
-<h3>Leaking libc</h3>
+<h2>Leaking libc</h2>
 
 <p>
-The binary in itself does not have enough gadgets to spawn a shell,
-therefore we will first need to leak the base address of libc through which
-we can contruct a ROP chain to the effect of <b>system("/bin/sh")</b>. To
-start, we need to leak the address of any given function by using
-<b>puts</b>. In my solution, I leaked <b>puts</b> and got the offset from
-the base using <a
+The binary itself does not have enough gadgets to spawn a shell, therefore
+we will first need to leak the base address of libc through which we can
+contruct a ROP chain to the effect of <b>system("/bin/sh")</b>. To start,
+we need to leak the address of any given function by using <b>puts</b>. In
+my solution, I leaked <b>puts</b> and got the offset from the base using <a
 href="https://libc.blukat.me/">https://libc.blukat.me/</a>.
 </p>
 
@@ -84,8 +83,8 @@ $ ROPgadget --binary jimi-jam | grep "pop rdi"
 
 <p>
 However, we can see that this is only a relative address, we will need to
-leak the base of this binary as well. Fortunately in the <b>main</b>
-function we can see that the binary is printing the address of a variable
+leak the base of this binary as well. Fortunately, in the <b>main</b>
+function, we can see that the binary is printing the address of a variable
 called <b>ROPJAIL</b>. We can extract the address while we are interacting
 with the binary and then calculate the offset to get the binary base. The
 offset will then remain the same whenever we run the binary.
@@ -148,10 +147,11 @@ libc_base = leaked_puts - 0x875a0
 </code>
 </pre>
 
-<h3>Spawning a shell</h3>
+<h2>Spawning a shell</h2>
+
 <p>
 Using the above libc database, we can also get the address of <b>system</b>
-and <b>/bin/sh</b> thus completing our payload. You can also see above that
+and <b>/bin/sh</b>, thus completing our payload. You can also see above that
 I have ended the ROP chain with the address of <b>main</b> so that we run
 the binary a second time to enter the payload below.
 </p>
