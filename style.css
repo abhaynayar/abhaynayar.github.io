@@ -57,12 +57,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .icons {
-  margin: 24px 8px;
+  margin: 24px 0px;
 }
 
 .icons img {
   height: 20px;
-  margin: 6px;
+  margin-right: 8px;
 }
 
 td, th {
@@ -70,7 +70,7 @@ td, th {
 }
 
 p {
-  margin: 2em 0;
+  margin: 0 0 2rem 0;
 }
 
 code {
@@ -164,4 +164,22 @@ blockquote:before {
 
 blockquote p {
   display: inline;
+}
+
+.collapsible {
+  border: none;
+  /*text-decoration: none;*/
+  background-color: #fef0df;
+}
+
+.blogDiv {
+  margin: 1rem 0;
+}
+
+.collapsible:after {
+  content: '\02795';
+}
+
+.active:after {
+  content: "\2796";
 }
