@@ -1,167 +1,167 @@
 @font-face {
-    font-family: 'body';
-    src: url(fonts/IBMPlexSans-Regular.woff2);
-    font-display: swap;
+  font-family: 'body';
+  src: url(fonts/IBMPlexSans-Regular.woff2);
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'body';
-    font-style: italic;
-    src: url(fonts/IBMPlexSans-Italic.woff2);
-    font-display: swap;
+  font-family: 'body';
+  font-style: italic;
+  src: url(fonts/IBMPlexSans-Italic.woff2);
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'body';
-    font-weight: 800;
-    src: url(fonts/IBMPlexSans-Bold.woff2);
-    font-display: swap;
+  font-family: 'body';
+  font-weight: 800;
+  src: url(fonts/IBMPlexSans-Bold.woff2);
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'headings';
-    src: url(fonts/Calendas-Regular.woff2);
-    font-display: swap;
+  font-family: 'headings';
+  src: url(fonts/Calendas-Regular.woff2);
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'headings';
-    font-style: italic;
-    src: url(fonts/Calendas-Italic.woff2);
-    font-display: swap;
+  font-family: 'headings';
+  font-style: italic;
+  src: url(fonts/Calendas-Italic.woff2);
+  font-display: swap;
 }
 
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-    color: black;
-    margin: 50px auto;
-    padding: 20px; 
-    max-width: 540px;
-    padding-bottom: 20px;
-    background-color: #fef0df;
-    font-family: 'body';
+  color: black;
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 540px;
+  padding-bottom: 20px;
+  background-color: #fef0df;
+  font-family: 'body';
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'headings', serif;
+  font-family: 'headings', serif;
 }
 
 @media (max-width: 400px) {
-    body {
-        margin: 25px auto;
-    }
+  body {
+    margin: 25px auto;
+  }
 }
 
 .icons {
-    margin: 24px 8px;
+  margin: 24px 8px;
 }
 
 .icons img {
-    height: 20px;
-    margin: 6px;
+  height: 20px;
+  margin: 6px;
 }
 
 td, th {
-    padding: 5px;
+  padding: 5px;
 }
 
 p {
-    margin: 2em 0;
+  margin: 2em 0;
 }
 
 code {
-    font-family: mono, monospace;
-    font-size: 14px;
-    border: 1px solid black;
+  font-family: mono, monospace;
+  font-size: 14px;
+  border: 1px solid black;
 }
 
 .date {
-    color: rgba(0,0,0,0.55);
-    font-size: 14px;
-    margin-left: 4px;
+  color: rgba(0,0,0,0.55);
+  font-size: 14px;
+  margin-left: 4px;
 }
 
 img {
-    max-width: 100%;
-    border-bottom: none;
+  max-width: 100%;
+  border-bottom: none;
 }
 
 #logo {
-    width: 64px;
-    margin-bottom: 20px;
+  width: 64px;
+  margin-bottom: 20px;
 }
 
 hr {
-    height: 1px;
-    background-color: black;
+  height: 1px;
+  background-color: black;
 }
 
 .blog {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 2px solid rgba(0,0,0,0.2);
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
 }
 
 a:hover {
-    border-color: currentColor;
+  border-color: currentColor;
 }
 
 .icons * {
-    border: 0px;
+  border: 0px;
 }
 
 body > a {
-    border: 0px;
+  border: 0px;
 }
 
 .table {
-    width: 100%;
-    display: table;
+  width: 100%;
+  display: table;
 }
 
 .tr {
-    display: table-row;
+  display: table-row;
 }
 
 .td {
-    display: table-cell;
+  display: table-cell;
 }
 
 .notice {
-    background-color: yellow;
+  background-color: yellow;
 }
 
 figcaption {
-    color: grey;
-    max-width: 100%;
-    font-size: 12px;
-    font-style: italic;
-    text-align: center;
+  color: grey;
+  max-width: 100%;
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
 }
 
 blockquote {
-    background: #f9f9f9;
-    border-left: 10px solid #ccc;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
 }
 
 blockquote:before {
-    color: #ccc;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
+  color: #ccc;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
 }
 
 blockquote p {
-    display: inline;
+  display: inline;
 }
