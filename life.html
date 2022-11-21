@@ -62,7 +62,7 @@ function weeksBetween(d1, d2) {
     return Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
 }
 
-weeksDelta = weeksBetween(new Date(1998, 11, 21), new Date());
+weeksDelta = weeksBetween(new Date("1998-11-21"), new Date());
 weeksFullRow = Math.floor((weeksDelta / 52));
 weeksModulo = weeksDelta % 52;
 
