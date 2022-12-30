@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<title>Life</title>
+<title>Life in Weeks</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="shortcut icon" href="img/life.png">
@@ -46,13 +46,21 @@ h1 {
   letter-spacing: 0.4em;
 }
 
+p {
+  color: #2a2a2a;
+  font-size: 12px;
+  text-align: center;
+  font-weight: normal;
+  letter-spacing: 0.2em;
+}
 </style>
 </head>
 
 <body>
 
 <div id="calendar" style="width:316px; margin:auto">
-  <h1>Life</h1>
+  <h1>Life in Weeks</h1>
+  <p id="ratio"></p>
 </div>
 
 
@@ -61,9 +69,14 @@ function weeksBetween(d1, d2) {
     return Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
 }
 
+
 weeksDelta = weeksBetween(new Date("1998-11-21"), new Date());
 weeksFullRow = Math.floor((weeksDelta / 52));
 weeksModulo = weeksDelta % 52;
+
+var element = document.getElementById("ratio");
+element.innerHTML = weeksDelta + " / " + 52*80 + " = " + ((weeksDelta /
+(52*80))*100).toFixed(2) + "%";
 
 for (i=0; i<weeksFullRow; ++i) {
   week_row = document.createElement("div");
