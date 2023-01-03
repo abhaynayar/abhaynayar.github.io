@@ -148,10 +148,13 @@ figcaption {
 }
 
 blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
+  /*background: #f9f9f9;*/
+  /*border-left: 10px solid #ccc;*/
+  /*margin: 10px 10px;*/
   padding: 0.5em 10px;
+  font-size: 14px;
+  font-style: italic;
+  font-family: serif;
 }
 
 blockquote:before {
