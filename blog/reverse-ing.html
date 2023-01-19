@@ -31,12 +31,12 @@ important things about the functions in the given file.
 <h2>reverse()</h2>
 
 <p>
-Length of the function: 0x6000b0 - 0x6000e4. This function swaps all bytes
-in _start(). So if _start() looks like 0xabcdefgh, it is turned into
-0xghefcdab. Everytime we jump into this function and go back, we see
-different code for _start(). This is a self modifying program. So it is
-much easier to do a dynamic analysis. Below is the pseudocode which
-performs the swap.
+Length of the function: 0x6000b0 - 0x6000e4. This function swaps all 
+bytes in <b>_start()</b>. So if <b>_start()</b> looks like
+<b>0xabcdefgh</b>, it is turned into 0xghefcdab. Everytime we jump into
+this function and go back, we see different code for <b>_start()</b>. This
+is a self modifying program. So it is much easier to do a dynamic analysis.
+Below is the pseudocode which performs the swap.
 </p>
 
 <pre>
@@ -64,10 +64,13 @@ for (ecx=0x6a; rcx &gt;=0; rcx--) {
 Length of the function: 0x6000e5 - 0x6001ca. This function makes calls to
 reverse() at almost every other line. rbx always points at reverse(). We
 call reverse() using <b>call rbx</b>. I have removed the calls to rbx below
-for code readability. rsi points at user input (size of user input is
-0x25=37 excluding newline). rdx starts decrementing from 0x25 to 0x00
-(excluding newline). This function loops 0x25 times using rdx, going
-through our input.
+for better code readability.
+</p>
+
+<p>
+rsi points at user input (size of user input is 0x25=37 excluding newline).
+rdx starts decrementing from 0x25 to 0x00 (excluding newline). This
+function loops 0x25 times using rdx, going through our input.
 </p>
 
 <pre>
@@ -137,9 +140,9 @@ the contents of the bytes used to build the flag check.
 
 <p>
 I didn't completely understand the check above, if someone understood this,
-please let me know. But using the same operation as the one performed in
-the program, we see that the right bytes result in a zero once xored and
-added.
+please let me know. In any case, using the same operation as the one
+performed in the program, we see that the right bytes result in a zero once
+xored and added.
 </p>
 
 <pre>

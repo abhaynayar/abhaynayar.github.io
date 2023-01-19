@@ -138,21 +138,25 @@ param_2 is 0x40 which means our buffer can only be 64 characters long.
 
 <p>
 But the interesting thing is that while strlen terminates after
-encountering a null byte, gets stops at newlines. So for example if our
-input is \x00AAAA\n, strlen will say that the length is zero, but the four
-A's will still be stored on the stack. So we can trick the length check and
-overflow the return address of the main function — since the buffer is
-stored in main, readline only contains the pointer to it. The amount of
-characters to input in order to redirect the control flow was figured out
-using dynamic analysis through gdb.
+encountering a null byte, gets stops at newlines. For example, if our
+input is <b>\x00AAAA\n</b>, strlen will say that the length is zero, but the four
+A's will still be stored on the stack.
+</p>
+
+<p>
+So we can trick the length check and overflow the return address of the
+main function — since the buffer is stored in main, readline only contains
+the pointer to it. The amount of characters to input in order to redirect
+the control flow was figured out using dynamic analysis through gdb.
 </p>
 
 <p>
 The only issue is that before overflowing the return address, the canary
 gets overflown too. So we first need to leak the canary and append it to
-our input. We need to see at what offset from the format string is the
-canary located, this can be done dynamically. We first observe the lines
-where the canary is being set, we break on it and inspect to get the value.
+our payload. For that we need to know what offset from the format string is
+the canary located. This can be done dynamically. We observe the
+instructions where the canary is being set, we break on them, and then
+inspect to them to get the value.
 </p>
 
 <pre>
@@ -173,10 +177,10 @@ rax            0x8307ee9bdbab600   590111093561144832
 </pre>
 
 <p>
-We can see that the canary value is 0x8307ee9bdbab600. Now we can keep on
-putting %p in our format string until we see the canary echoed back to us.
-Once we have that, we can write the canary onto the stack with the gets
-overflow to prevent stack smashing detection.
+We can see that the canary value is 0x8307ee9bdbab600. Now we can keep
+repeating %p in our format string until we see the canary echoed back to
+us.  Once we have that, we can write the canary onto the stack with the
+gets overflow to prevent stack smashing detection.
 <p>
 
 </p>
@@ -185,7 +189,11 @@ Since the binary's and libc's addresses keep changing on each execution, we
 need to first leak their bases. This can be done using the format string
 vulnerability as well. After some more time with gdb, I figured out that
 the canary is at offset 12 and the binary is at offset 18 from the format
-string. We need to mask the lower three nibbles (4KB) to get the base for
+string.
+</p>
+
+<p>
+We need to mask the lower three nibbles (4KB) to get the base for
 the binary from the extracted address. We can leak libc using a simple pop
 rdi gadget that we can find within the binary and use it to leak puts and
 consequently libc.

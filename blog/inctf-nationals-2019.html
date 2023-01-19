@@ -36,8 +36,8 @@ month of October, followed by a qualifier CTF in November.
 
 <p>
 The qualifier round runs for 24 hours and it is extremely beginner
-friendly. Depending on which age group you fall into (high school, college,
-or professional) you qualify for the three-day conference held in the last
+friendly. Depending on which group you fall under (high school, college,
+or working) you qualify for the three-day conference held in the last
 week of December.
 </p>
 
@@ -52,28 +52,32 @@ Persistent Threats by Shaunak Ganorkar.
 <p>
 On the first night, there was a campfire where we were divided into groups
 and we talked about how we got started in hacking. It was a great way to
-chill and network with people having similar interests. If you have the
-opportunity to participate in InCTF Nationals, I highly recommend you to do
-so just to be around some really awesome hackers.
+network with people having similar interests. If you have the opportunity
+to participate in InCTF Nationals, I highly recommend you to do so just to
+be around some really awesome hackers.
 </p>
 
 <h2>Day two</h2>
 
 <p>
 On the second day, we had an attack-defense CTF. This was my first time
-playing attack-defense and I completely bombed it. We were grouped randomly
-in threes and we had a few services on our machine that we had to protect.
-Unfortunately, I do not recall exactly what we had to do, but I can say for
-sure that our team messed up pretty bad. Still there is something really
-cool about playing an onsite attack-defense and I loved it.
+playing attack-defense and we completely bombed it. We were grouped
+randomly in threes and we had a few services on our machine that we had to
+protect.  Unfortunately, I do not recall exactly what we had to do, but I
+can say for sure that our team messed up pretty bad.
+</p>
+
+<p>
+Still there was something really cool about playing an onsite
+attack-defense and I loved it.
 </p>
 
 <p>
 We also had talks and hacking stalls. Personally, I didn't get a lot of
 time in the hacking stalls, but from the little time I spent roaming around
-I could see various cool things such as a lock-picking, car hacking, and
-some hardware-related stalls. They even had their own hardware badge for
-the hardware CTF — which in retrospect I wish I had participated in.
+I could see various things such as a lock-picking, car hacking, and some
+hardware-related stalls. They even had their own hardware badge for the
+hardware CTF — which in retrospect I wish I had participated in.
 </p>
 
 <h2>Day three</h2>
@@ -82,18 +86,21 @@ the hardware CTF — which in retrospect I wish I had participated in.
 For the final CTF, the problem-set was relatively easy, so the most
 important thing to keep in mind was the workflow. Though I had worked a lot
 on my workflow leading up to the CTF, they didn't allow us to use our own
-systems so I had a lot of small issues with the tooling. They wanted us to
-use their lab computers to prevent flag-sharing, but in my opinion it
+computers so I had a lot of small issues with the tooling. They wanted us
+to use their lab computers to prevent flag-sharing, but in my opinion it
 really doesn't help prevent it, rather it slows down the whole process.
 </p>
 
 <p>
 In the last thirty minutes or so of the CTF, they hid the scoreboard.
 Before they hid it, I was ranked 2nd. The person who was 1st had a huge
-margin above me; but below me, people were closing in. I just solved a
-single challenge after the scoreboard was hidden, so I was really anxious
-whether I would be able to hold that position. They later released the
-scoreboard and I was 2nd.
+margin above me; but below me, people were closing in.
+</p>
+
+<p>
+I just solved a single challenge after the scoreboard was hidden, so I was
+really anxious whether I would be able to hold that position. They later
+released the scoreboard and I was 2nd.
 </p>
 
 <p>
@@ -192,9 +199,9 @@ characters long, it exits.
 
 <p>
 For the rest of the program I used a decompiler. Below is the output after
-I have cleaned it up for better understanding. Although switch cases are
-easy to spot even in disassembly, during a CTF, it is always better to ease
-your burden therefore I took this approach. 
+I cleaned it up for better understanding. Although switch cases are easy to
+spot even in disassembly, during a CTF, it is always better to ease your
+burden therefore I took this approach. 
 </p>
 
 <pre>
@@ -242,8 +249,12 @@ for (i=8; i; --i)
 </pre>
 
 <p>
-We are asked to enter a number. Every case calls a function (named using
-ordinal conventions). The arguments passed are a pointer to a specific
+We are asked to enter a number.
+</p>
+
+<p>
+Every case calls a function named using
+ordinal conventions. The arguments passed are a pointer to a specific
 position (our number) in input string (which is passed using command line
 arguments) and our input number.
 </p>
@@ -311,8 +322,11 @@ Flag: <b>inctf{Enj0y_th2_p4rty_w1th_p4rts_0f_c0de!}</b>
 <p>
 I don't have the source for the web page, but there was a local file
 inclusion vulnerability. The home page had some hints towards what the
-parameter could have been (the keyword page was mentioned with emphasis),
-but since fuzzing parameters was not allowed, you could only rely on
+parameter could have been (the keyword page was mentioned with emphasis).
+</p>
+
+<p>
+But since fuzzing parameters was not allowed, you could only rely on
 stumbling upon this fact. The /etc/passwd file had the flag. Payload:
 http://52.168.55.145/index.php?page=../../../../etc/passwd
 </p>
@@ -373,9 +387,9 @@ Flag: <b>inctf{w0w_D0_Y0u_w4Nt_Th2_F0Rc3_t0_b3_w1Th_Y0u}</b>
 
 <p>
 In this challenge we get a PCAP: <b>Chall.pcapng</b> and after some
-analysis using wireshark we see that a client is sending some kind of a
-POST request to a server repeatedly with different querybytes "abcdef",
-below is the last request in the series.
+analysis using wireshark we see that the client is sending a POST request
+to the server repeatedly with different querybytes "abcdef", below is the
+last request in the series.
 </p>
 
 <pre>
@@ -410,9 +424,12 @@ in the above request).
 
 <p>
 Because of the above restrictions, I made a small script that allowed me to
-perform the actions faster and prevent a timeout. I could have fully
-automated it, but I wasn't very confident due to the time constraints so I
-used this ad-hoc solution.
+perform the actions faster and prevent a timeout.
+</p>
+
+<p>
+I could have fully automated it, but I wasn't very confident due to the
+time constraints so I used this ad-hoc solution.
 </p>
 
 <pre>

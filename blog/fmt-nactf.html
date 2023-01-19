@@ -108,9 +108,12 @@ You typed: 64
 The reason we get a 40 when we put a %x is because what a format specifier
 does is pop the next value off the stack and display it, ideally this value
 on the stack should be mentioned by the developer using arguments in
-printf, when not, we can essentially read the entire stack. When we convert
-40 from hexadecimal to decimal we see that it turns out to be 64 which is
-the length of the char array buf. Interesting.
+printf, when not, we can essentially read the entire stack.
+</p>
+
+<p>
+When we convert 40 from hexadecimal to decimal we see that it turns out to
+be 64 which is the length of the char array buf. Interesting.
 </p>
 
 <p>
@@ -156,17 +159,20 @@ Type something&gt;You typed: a7d6761 6c665f79 6d6d7564 5f735f72 6179616e 5f79616
 <p>
 The %[num][fs]$ helps us use the format specifier fs at an offset num from
 the beginning of where we start	reading the stack. We need this since our
-string isn't long enough to reach flag using %08x. We can see that the
-values that we are getting are in the ASCII range,	so we head up to a hex
-to ASCII converter online and get it converted.
+string is not long enough to reach the flag using <b>%08x</b>. We can see
+that the values that we are getting are in the ASCII range,	so we head up
+to a hex to ASCII converter online and get it converted.
 </p>
 
 <p>
 You might have noticed that I am running the loop backwards from 40 to 30.
 This is because of little-endianness. For example, if you store ABCD EFGH
-on a stack and later retrieve it, it will be something like DCBA HGFE. So
-the individual bytes are reversed, but not the entire word. Therefore in
-order to retrieve it, I go in reverse order and I get HGFE DCBA which can
+on a stack and later retrieve it, it will be something like DCBA HGFE.
+</p>
+
+<p>
+So the individual bytes are reversed, but not the entire word. Therefore in
+order to retrieve it, I went in reverse order and I get HGFE DCBA which can
 then be easily reverse to get the original order. Keep in mind that all of
 this can be done using an elegant python script, but I was lazy so I just
 hacked it together.
@@ -278,20 +284,26 @@ num.
 
 <p>
 Another thing that I struggled for a while on this challenge was randomized
-address values. Apparently gdb gives you the same address values when you
-debug a program, so when I finally "solved" the challenge in gdb, I was
-dissapointed to realize that it didn't work on their server.  Using the -p
-flag you can attach a process to gdb and see that you get different values
-for the address of num every time you run it.
+address values.
+</p>
+
+<p>
+Apparently gdb gives you the same address values when you debug a program,
+so when I finally "solved" the challenge in gdb, I saw that it didn't work
+on their server.  Using the -p flag you can attach a process to gdb and see
+that you get different values for the address of num every time you run it.
 </p>
 
 <p>
 Getting back to the problem, our goal is to change the value of num such
 that it equals 42.  There is only one format specifier that can help you
 write values: %n. What it does is write the number of characters so far in
-the printf statement to the given variable on the stack. So for example
-AAAA%n will write the value 4 into the address that it finds as soon as it
-pops the stack.
+the printf statement to the given variable on the stack.
+</p>
+
+<p>
+So for example AAAA%n will write the value 4 into the address that it finds
+as soon as it pops the stack.
 </p>
 
 <p>
@@ -305,6 +317,9 @@ With this information in mind, we realize that we need two things:
 <p>
 Luckily, we don't have to go to the main's stack to change num. In fact,
 the address of num keeps changing, so we can only use the pointer to num.
+</p>
+
+<p>
 The second address can easily be figured out by entering some recognizable
 sequence such as "AAAAABBBB...%x.%x." and then inspecting the memory
 immediately after the buffer is filled.

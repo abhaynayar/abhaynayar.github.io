@@ -33,9 +33,9 @@ This is a binary exploitation challenge.
 Once we decompile the given binary, we see that there is a buffer overflow
 in the <b>vuln</b> function. As you can see below, we have a buffer
 <b>local_10</b> of size 8 but we are reading <b>0x40</b> bytes of user
-input into it. If you run <b>checksec</b> on the binary, you will see that
-there is no canary, therefore we can easily take control of the instruction
-pointer.
+input into it. When you run <b>checksec</b> on the binary, you will see
+that there is no canary, therefore we can easily take control of the
+instruction pointer.
 </p>
 
 <pre>
@@ -51,7 +51,7 @@ void vuln(void) {
 
 <p>
 In the challenge zip we were also given the library that was being used on
-the server, which coincidentally was the same as the one on my system
+the server, which coincidentally was the same as the one on my computer
 (Ubuntu 20.04). So as long as I get a shell locally, it should work
 remotely as well.
 </p>
@@ -59,12 +59,12 @@ remotely as well.
 <h2>Leaking libc</h2>
 
 <p>
-The binary itself does not have enough gadgets to spawn a shell, therefore
-we will first need to leak the base address of libc through which we can
-contruct a ROP chain to the effect of <b>system("/bin/sh")</b>. To start,
-we need to leak the address of any given function by using <b>puts</b>. In
-my solution, I leaked <b>puts</b> and got the offset from the base using <a
-href="https://libc.blukat.me/">https://libc.blukat.me/</a>.
+The binary itself does not have enough gadgets to spawn a shell, so we will
+first need to leak the base address of libc through which we can contruct a
+ROP chain to the effect of <b>system("/bin/sh")</b>. To start, we need to
+leak the address of any given function by using <b>puts</b>. In my
+solution, I leaked <b>puts</b> and got the offset from the base using:
+<a href="https://libc.blukat.me/">https://libc.blukat.me/</a>.
 </p>
 
 <p>
@@ -85,9 +85,13 @@ $ ROPgadget --binary jimi-jam | grep "pop rdi"
 However, we can see that this is only a relative address, we will need to
 leak the base of this binary as well. Fortunately, in the <b>main</b>
 function, we can see that the binary is printing the address of a variable
-called <b>ROPJAIL</b>. We can extract the address while we are interacting
-with the binary and then calculate the offset to get the binary base. The
-offset will then remain the same whenever we run the binary.
+called <b>ROPJAIL</b>.
+</p>
+
+<p>
+We can extract the address while we are interacting with the binary and
+then calculate the offset to get the binary base. The offset will then
+remain the same whenever we run the binary.
 </p>
 
 <pre>
@@ -151,9 +155,9 @@ libc_base = leaked_puts - 0x875a0
 
 <p>
 Using the above libc database, we can also get the address of <b>system</b>
-and <b>/bin/sh</b>, thus completing our payload. You can also see above that
-I have ended the ROP chain with the address of <b>main</b> so that we run
-the binary a second time to enter the payload below.
+and <b>/bin/sh</b>, thus completing our payload. You can also see above
+that I have ended the ROP chain with the address of <b>main</b> so that we
+run the binary a second time to enter the payload below.
 </p>
 
 <pre>

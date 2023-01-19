@@ -67,11 +67,11 @@ related to this that I had stored in my bookmarks.
 
 <p>
 So in order to understand the code we need IDA to interpret it as 64-bit.
-We can do this by selecting the area that we want to generate code for (in
-the text-view) then going to <b>Edit &gt; Segment &gt; Create Segment</b>.
-In the dialog box that follows, make sure to select 64-bit segment. Once we
-have repurposed that area we can go to <b>Edit &gt; Code</b> to generate
-the 64-bit code for that segment.
+We can do this by selecting the area that we want to generate code for in
+the text-view, then going to <b>Edit &gt; Segment &gt; Create Segment</b>.
+Then in the dialog box that follows, make sure to select 64-bit segment.
+Once we have repurposed that area we can go to <b>Edit &gt; Code</b> to
+generate the 64-bit code for that segment.
 </p>
 
 <pre>
@@ -108,7 +108,7 @@ the 64-bit code for that segment.
 </pre>
 
 <p>
-Beyond this, we get another string of data which IDA didn't recognize as
+Beyond this, we get another string of data which IDA did not recognize as
 code. However, this time it is 32-bit code. So we can simply hit <b>Edit
 &gt; Code</b> to get the intended code.
 </p>
@@ -134,7 +134,7 @@ _32seg:8048114 _32seg          ends
 
 <p>
 After we have the right code, the program is trivially easy to crack. It
-checks the user input against the XOR of a set of values in the data
+first checks the user input against the XOR of a set of values in the data
 section at address <b>0x80481C3</b>, with a rotating value in a register
 — all of this is included in the code above.
 </p>
