@@ -328,8 +328,11 @@ immediately after the buffer is filled.
 <p>
 With these two addresses, we can get the offset value and using the same
 technique as above, this time with the %n specifier we can write the value.
-After some inspection with gdb, I figured out that the offset was 24. So
-instead of printing the exact address, we could get the offset. We were
+After some inspection with gdb, I figured out that the offset was 24.
+</p>
+
+<p>
+So instead of printing the exact address, we could get the offset. We were
 lucky to have num passed as an argument to the function even though it
 serves no other purpose than to help us solve the challenge.
 </p>

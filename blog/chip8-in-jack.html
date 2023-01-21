@@ -64,15 +64,14 @@ class Chip8 {
 
 <p>
 CHIP-8 has 16 data registers that we have declared as the array V. It also
-has an address register called I. Then we also have the program counter PC
-that points to the address in memory that we are supposed to interpret
-next.
+has an address register called I. It also has the program counter PC that
+points to the address in memory that we are supposed to interpret next.
 </p>
 
 <p>
 Apart from the CPU stuff, we have the stack pointer SP, an array for the
 memory called RAM, and another array for the stack. The stack is separate
-from the RAM and it is used to store return address when functions are
+from the RAM and it is used to store return addresses when functions are
 called.
 </p>
 
@@ -142,9 +141,9 @@ function void drawBox() {
 
 <p>
 When we are drawing within the CHIP-8 frame on the screen, we also need a
-translation layer for getting and setting the pixels. (We need to get
-pixels since CHIP-8 has an XORing functionality that requires the previous
-pixel state to be known).
+translation layer for getting and setting the pixels. We need to get pixels
+since CHIP-8 has an XORing functionality that requires the previous pixel
+state to be known.
 </p>
 
 <pre>
@@ -214,7 +213,7 @@ function int fetch() {
 
 <p>
 Then we have the push and pop functions that are pretty self explanatory.
-Rememeber that the stack is only used for storing return addresses.
+Remember that the stack is only used for storing return addresses.
 </p>
 
 <pre>
