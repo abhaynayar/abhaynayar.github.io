@@ -1,34 +1,29 @@
 @font-face {
   font-family: 'body';
   src: url(fonts/IBMPlexSans-Regular.woff2);
-  font-display: swap;
 }
 
 @font-face {
   font-family: 'body';
   font-style: italic;
   src: url(fonts/IBMPlexSans-Italic.woff2);
-  font-display: swap;
 }
 
 @font-face {
   font-family: 'body';
   font-weight: 800;
   src: url(fonts/IBMPlexSans-Bold.woff2);
-  font-display: swap;
 }
 
 @font-face {
   font-family: 'headings';
   src: url(fonts/Calendas-Regular.woff2);
-  font-display: swap;
 }
 
 @font-face {
   font-family: 'headings';
   font-style: italic;
   src: url(fonts/Calendas-Italic.woff2);
-  font-display: swap;
 }
 
 html {
@@ -47,7 +42,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'headings', serif;
+  font-family: 'headings';
 }
 
 @media (max-width: 400px) {
@@ -74,7 +69,7 @@ p {
 }
 
 code {
-  font-family: mono, monospace;
+  font-family: monospace;
   font-size: 14px;
   border: 1px solid black;
 }
