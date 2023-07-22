@@ -144,23 +144,3 @@ blockquote p {
 body {
   font-family: 'IBMPlexSans';
 }
-
-/* Heading Font */
-
-@font-face {
-  src: url('fonts/Calendas-Regular.woff2');
-  font-style: normal;
-  font-family: 'Calendas';
-  font-display: swap;
-}
-
-@font-face {
-  src: url(fonts/Calendas-Italic.woff2);
-  font-style: italic;
-  font-family: 'Calendas';
-  font-display: swap;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Calendas';
-}
