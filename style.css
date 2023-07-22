@@ -9,7 +9,6 @@ body {
   padding: 20px;
   max-width: 540px;
   padding-bottom: 20px;
-  background-color: #fef0df;
 }
 
 @media (max-width: 400px) {
@@ -23,7 +22,7 @@ body {
 }
 
 .icons img {
-  height: 20px;
+  height: 24px;
   margin-right: 8px;
 }
 
