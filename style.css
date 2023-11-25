@@ -18,20 +18,13 @@ body {
 }
 
 .icons {
-  margin: 22px 0px;
+  margin: 24px 0px;
 }
 
 .icons img {
   height: 24px;
-  width: 22px;
   margin-right: 8px;
 }
-
-div.icons a:nth-child(3) img {
-  width: 18px;
-  margin-left: 2px;
-}
-
 
 td, th {
   padding: 5px;
