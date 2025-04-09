@@ -189,7 +189,7 @@ function void loadRom() {
     let i=0;
 
     // Hard-coded: getting ROM from disk.
-    while (i<144) {
+    while (i&lt;144) {
         let RAM[i+512] = Disk.peek(i);
         let i=i+1;
     }
