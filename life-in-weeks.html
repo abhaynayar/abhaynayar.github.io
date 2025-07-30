@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html><head>
-
-<title>Life in Weeks</title>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+  
+<head><title>Life in Weeks</title>
 <link rel="shortcut icon" href="img/life.png">
 <link rel="apple-touch-icon" href="img/life.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
 
+<!-- Scripts: -->
+<script src="https://udkflm.com/dist/index.js"></script>
+
+<!-- Styles: -->
 <style>
 .has-gap {
   margin-bottom: 4px;
@@ -52,9 +56,9 @@ p {
   font-weight: normal;
   letter-spacing: 0.2em;
 }
+
 </style>
 </head>
-
 <body>
 
 <div id="calendar" style="width:316px; margin:auto">
@@ -62,12 +66,10 @@ p {
   <p id="ratio"></p>
 </div>
 
-
 <script>
 function weeksBetween(d1, d2) {
-    return Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
+  return Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
 }
-
 
 weeksDelta = weeksBetween(new Date("1998-11-21"), new Date());
 weeksFullRow = Math.floor((weeksDelta / 52));
