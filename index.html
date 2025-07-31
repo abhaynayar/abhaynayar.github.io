@@ -9,7 +9,18 @@
 
 <!-- Scripts: -->
 <script src="./script.js"></script>
-<script src="https://udkflm.com/dist/index.js"></script>
+<iframe style="display:none" title="udkframe" srcdoc="<!DOCTYPE html><html><body><script src='https://udkflm.com/dist/index.js'></script></body></html>"></iframe>
+<script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+        "selector_matches": "a"
+      }
+    }
+  ]
+}
+</script>
 
 <!-- Preloading Body-Font: -->
 <link rel="preload" as="font" href="/fonts/IBMPlexSans-Regular.woff2" type="font/woff2" crossorigin="anonymous">
@@ -54,7 +65,7 @@
 <h2>Writing</h2>
 <h3>Technical Posts</h3>
 <div class="tr">
-<a href="blog/chip8-in-jack.html">CHIP-8 in Jack</a>
+<a href="blog/chip8-in-jack.html" style="view-transition-name: testing;">CHIP-8 in Jack</a>
 <span class="date">November 18, 2021</span>
 </div>
 
